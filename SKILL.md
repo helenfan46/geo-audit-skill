@@ -1,7 +1,7 @@
 ---
 name: geo-audit
 description: "Audit a professional services firm's visibility in AI-generated answers. Auto-identify competitors, generate intent-tagged test prompts from real sources, run isolated sub-agent baseline testing, and produce a narrative-first strategic report."
-version: "4.1.1"
+version: "1.0.0"
 license: AGPL-3.0
 tags:
   - generative-engine-optimization
@@ -52,6 +52,7 @@ Default: 15 prompts for an initial audit. Use 20 prompts only if the user reques
 ## What This Skill Cannot Do
 
 - **Produce a cross-model measurement.** Sub-agents run on the same model as the main agent. A true multi-model baseline requires testing across ChatGPT, Perplexity, Gemini, etc. in clean sessions — that is a separate, manual process (or a paid service).
+- **Fully eliminate self-priming bias.** Spawning isolated sub-agents with no research context substantially reduces self-priming, but cannot eliminate it under the current single-model architecture — all sub-agents still share the same underlying model. This is a hard architectural limit; see [Known Limitations](#known-limitations).
 - Scrape forums reliably (Reddit frequently blocks bots)
 - Access paywalled or login-gated competitor content
 - Guarantee SEO rankings or AI mention placement
@@ -87,6 +88,8 @@ The disclaimer must be formatted in **italic, regular weight, black text** — n
 ---
 
 ## Workflow
+
+**Vertical-agnostic instruction (read before every step):** This skill is designed for any professional services firm — legal, consulting, accounting, IB, advisory, healthcare consulting, architecture, engineering services, etc. The examples throughout this workflow (Reddit search queries, Google PAA queries, prompt examples, scorecard examples, third-party directories) often use legal/IP scenarios for illustration. When running an audit, you MUST translate every example to the target firm's actual vertical. Do not search Chambers, Legal 500, or IAM Patent 1000 for a consulting firm — search Source Global, ALM Intelligence, Forrester, or the equivalent for that vertical. Do not generate IP-flavored Reddit or Google queries for an accounting firm — use audit, tax, or industry-specific queries. Replace all example terminology with the equivalent for the target's industry. **The examples are illustrative, not directive.**
 
 ### Step 0: Competitor Auto-Identification
 
@@ -403,7 +406,7 @@ Intent tags are an analytical layer used in gap analysis and recommendations —
 
 ## Origin
 
-Built during the 100-day OpenClaw Law experiment ([helenlab.com/openclawlaw](https://helenlab.com/openclawlaw)) — a public experiment building an AI-native law practice with AI agents. The workflow was auto-generated into a skill by the agent, then reviewed and revised by a human attorney. The skill evolved from v1 (content-analysis predictions) through v4 (isolated sub-agent testing with narrative-first reporting) based on real-world client use and iterative feedback.
+Built during the 100-day OpenClaw Law experiment ([helenlab.com/openclawlaw](https://helenlab.com/openclawlaw)) — a public experiment building an AI-native law practice with AI agents. The workflow was auto-generated into a skill by the agent, then reviewed and revised by a human attorney. The skill went through several methodological iterations during the experiment — from early content-analysis predictions to the current isolated sub-agent testing with narrative-first reporting — based on real-world client use and iterative feedback. **v1.0 marks the first public release.**
 
 Created by [Helen Fan](https://www.linkedin.com/in/helenfanlegalai/) × Morgan (an AI agent collaborator on the OpenClaw experiment).
 
