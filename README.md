@@ -1,7 +1,7 @@
 # GEO Audit Skill
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Version](https://img.shields.io/badge/version-4.1.1-green.svg)](./SKILL.md)
+[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](./SKILL.md)
 [![Built for](https://img.shields.io/badge/built_for-any_LLM_with_sub--agents-orange.svg)](#requirements)
 
 > A self-serve audit that tells a professional services firm where it stands in AI-generated answers — and what content gaps to fix first.
@@ -23,6 +23,7 @@ Built during the [100-day OpenClaw Law experiment](https://helenlab.com/openclaw
 ## What it cannot do
 
 - **Produce a cross-model measurement.** Sub-agents run on the same model as the main agent — results are directional, not definitive. A true multi-model baseline requires testing across ChatGPT, Perplexity, Gemini, etc. in clean sessions.
+- **Fully eliminate self-priming bias.** Isolated sub-agents substantially reduce it, but residual bias remains — all sub-agents still run on the same underlying model. This is a hard architectural limit; see [Known Limitations](./SKILL.md#known-limitations).
 - Scrape forums that aggressively block bots (Reddit may CAPTCHA; Quora/AVVO consistently block).
 - Replace a dedicated marketing agency or technical SEO audit.
 
@@ -91,9 +92,9 @@ geo-audit-skill/
 
 ## Versioning & origin
 
-Current version: **4.1.1**
+Current version: **1.0.0** — first public release.
 
-This skill evolved from v1 (content-analysis predictions) through v4 (isolated sub-agent testing with narrative-first reporting), iterated on real client work during the 100-day OpenClaw Law experiment.
+This skill went through several methodological iterations during the 100-day OpenClaw Law experiment — from early content-analysis predictions to the current isolated sub-agent testing with narrative-first reporting — based on real client work and iterative feedback.
 
 Created by [Helen Fan](https://www.linkedin.com/in/helenfanlegalai/) × Morgan (an AI agent collaborator). The workflow was auto-generated into a skill by the agent, then reviewed and revised by a human attorney.
 
