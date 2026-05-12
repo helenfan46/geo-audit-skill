@@ -1,7 +1,7 @@
 ---
 name: geo-audit
 description: "Audit a professional services firm's visibility in AI-generated answers. Auto-identify competitors, generate intent-tagged test prompts from real sources, run isolated sub-agent baseline testing, and produce a narrative-first strategic report."
-version: "4.1.0"
+version: "4.1.1"
 license: AGPL-3.0
 tags:
   - generative-engine-optimization
@@ -65,11 +65,7 @@ This skill works with **any LLM that has web search, web browsing, and sub-agent
 
 ## How the Baseline Testing Works (Read This First)
 
-### The problem: self-priming
-
-When one agent does everything — researches the firm, audits competitors, generates prompts, AND answers those prompts — its answers are biased. By Step 3, the agent has spent thousands of tokens reading about the target firm. When asked to "answer neutrally," it carries that context forward. The result looks like data but is anchored by prior research.
-
-### The fix: isolated sub-agents
+### The mechanism
 
 For each of the 15 test prompts, the main agent spawns a **separate, isolated sub-agent**. Each sub-agent receives:
 - One prompt (e.g., "What should I do if my startup receives a patent cease-and-desist letter?")
@@ -80,7 +76,7 @@ The sub-agent answers cold. The main agent then reads the response and records: 
 
 ### What this gives you
 
-A **single-model visibility baseline** — directional, not definitive. It tells you whether the target firm shows up when one AI model is asked cold. It is more reliable than a prediction based on website content analysis, but less reliable than a multi-model test across ChatGPT, Perplexity, and Gemini in clean browser sessions.
+A **single-model visibility baseline** — directional, not definitive. It tells you whether the target firm shows up when one AI model is asked cold. It is more reliable than a prediction based on website content analysis, but less reliable than a multi-model test across ChatGPT, Perplexity, and Gemini in clean browser sessions. The limits of this method are documented in the [Known Limitations](#known-limitations) section and surfaced in the disclaimer below.
 
 ### Disclaimer the agent must include
 
@@ -378,7 +374,7 @@ Intent tags are an analytical layer used in gap analysis and recommendations —
 ## Known Limitations
 
 1. **Single-model baseline.** Sub-agents run on the same model as the main agent. Results reflect one model's training data and behavior. Different models will produce different results.
-2. **Residual self-priming risk.** Although sub-agents are spawned without research context, some platforms may leak context through shared memory or session state. The disclaimer must always be included.
+2. **Residual self-priming risk.** The isolated sub-agent design exists because a single agent that researched the firm, audited competitors, and generated prompts before answering them would carry that context forward — even when asked to "answer neutrally," its responses would be anchored by prior research. Spawning a fresh sub-agent with no research context substantially reduces this bias, but does not eliminate it: all sub-agents still run on the same underlying model, and some platforms may leak context through shared memory or session state. The disclaimer must always be included.
 3. **Results are time-dependent.** AI model outputs change as models are updated. Re-run quarterly if visibility is a tracked KPI.
 4. **Competitor sites may block access.** Some firms use bot protection. If you cannot access a site, note it and move on.
 5. **Sentiment tagging involves judgment.** A mention classified as Neutral by one assessment may look Positive to another. Document reasoning for ambiguous cases.
