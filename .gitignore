@@ -1,0 +1,33 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Generated audit outputs (don't commit client deliverables)
+/audits/
+/output/
+*.docx
+*.pdf
+!docs/**/*.pdf
+
+# Python (if anyone adds helper scripts later)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node (in case of future tooling)
+node_modules/
+
+# Misc
+*.log
+.env
+.env.local
