@@ -1,7 +1,7 @@
 # GEO Audit Skill
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Version](https://img.shields.io/badge/version-4.1.0-green.svg)](./SKILL.md)
+[![Version](https://img.shields.io/badge/version-4.1.1-green.svg)](./SKILL.md)
 [![Built for](https://img.shields.io/badge/built_for-any_LLM_with_sub--agents-orange.svg)](#requirements)
 
 > A self-serve audit that tells a professional services firm where it stands in AI-generated answers — and what content gaps to fix first.
@@ -51,13 +51,11 @@ If your platform does not support sub-agents, you can still run Steps 0–2 and 
 
 ---
 
-## Why isolated sub-agents?
+## How it tests visibility
 
-When one agent does everything — researches the firm, audits competitors, generates prompts, AND answers those prompts — its answers are biased. By the time it reaches the testing step, it has spent thousands of tokens reading about the target firm. Asking it to "answer neutrally" doesn't work; it carries that context forward.
+For each of the 15 test prompts, the main agent spawns a separate, isolated sub-agent that receives only the prompt and a neutral "answer as a helpful AI" instruction — no firm name, no research context, no competitor data. The sub-agent answers cold, and the main agent records which firms get mentioned and with what sentiment.
 
-**The fix:** for each of the 15 test prompts, the main agent spawns a separate, isolated sub-agent that receives only the prompt and a generic "answer as a helpful AI" instruction — no firm name, no research context, no competitor data.
-
-This gives a single-model visibility baseline that's more reliable than predicting from website content, but less reliable than a multi-model test across providers. The skill enforces a [transparency disclaimer](./SKILL.md#disclaimer-the-agent-must-include) on every report so readers know what they're looking at.
+This produces a **single-model directional baseline** — more reliable than predicting visibility from website content, but less reliable than a multi-model test across ChatGPT, Perplexity, and Gemini in clean sessions. The skill enforces a [transparency disclaimer](./SKILL.md#disclaimer-the-agent-must-include) on every report so readers know what they're looking at, and the [limitations are documented in SKILL.md](./SKILL.md#known-limitations).
 
 ---
 
@@ -93,7 +91,7 @@ geo-audit-skill/
 
 ## Versioning & origin
 
-Current version: **4.1.0**
+Current version: **4.1.1**
 
 This skill evolved from v1 (content-analysis predictions) through v4 (isolated sub-agent testing with narrative-first reporting), iterated on real client work during the 100-day OpenClaw Law experiment.
 
@@ -119,6 +117,6 @@ If you build a product or service on top of this skill, you must open-source you
 
 ## Get a deeper assessment
 
-This skill gives you a **single-model directional baseline**. For a comprehensive multi-model baseline across ChatGPT, Perplexity, and Gemini — or to discuss your firm's marketing strategy in the AI era — Helen offers it as a consultancy service: [helenlab.com/consultancy](https://www.helenlab.com/consultancy).
+This skill gives you a **single-model directional baseline**. For a comprehensive multi-model baseline across ChatGPT, Perplexity, and Gemini — or to discuss your firm's marketing strategy in the AI era — Helen offers it as a consultancy service: [helenlab.com/consultancy](https://helenlab.com/consultancy).
 
 Contact: **helen@helenlab.com**
