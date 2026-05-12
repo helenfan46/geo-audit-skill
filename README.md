@@ -1,7 +1,7 @@
 # GEO Audit Skill
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](./SKILL.md)
+[![Version](https://img.shields.io/badge/version-1.1.0-green.svg)](./SKILL.md)
 [![Built for](https://img.shields.io/badge/built_for-any_LLM_with_sub--agents-orange.svg)](#requirements)
 
 > A self-serve audit that tells a professional services firm where it stands in AI-generated answers — and what content gaps to fix first.
@@ -37,8 +37,14 @@ Built during the [100-day OpenClaw Law experiment](https://helenlab.com/openclaw
 
    > Run a GEO audit for **[Firm Name]** (**[firm-url.com]**). They are a **[size] [type]** firm. Practice areas: **[list]**.
 
-4. Approve the auto-identified competitor list when the agent presents it.
-5. Wait for the agent to finish Steps 1–5. Default deliverable is a `.docx` report.
+4. The agent will ask whether you want **Demo (~5 min)** or **Full (~15–20 min)**. Recommended: try Demo first to preview output, then run Full if useful. If you don't specify, Full runs by default.
+5. Approve the auto-identified competitor list when the agent presents it.
+6. Wait for the agent to finish. Default deliverable is a `.docx` report.
+
+### Two modes
+
+- **Full audit (default, ~15–20 min)** — 5 competitors, 15 prompts from 3 sources (competitor sites + Reddit + Google PAA), 15 isolated sub-agent tests. Highest confidence; use this before making real content strategy or investment decisions.
+- **Demo (~5 min)** — 3 competitors, 5 prompts from competitor sites + general web search, 5 isolated sub-agent tests. Faster preview; useful for deciding whether the Full audit is worth running, or for getting a directional read on visibility.
 
 ## Requirements
 
@@ -92,7 +98,7 @@ geo-audit-skill/
 
 ## Versioning & origin
 
-Current version: **1.0.0** — first public release.
+Current version: **1.1.0** — adds Demo mode (3 competitors, 5 prompts, ~5 min) alongside the Full audit, so first-time users can preview output before committing to a 15–20 min run.
 
 This skill went through several methodological iterations during the 100-day OpenClaw Law experiment — from early content-analysis predictions to the current isolated sub-agent testing with narrative-first reporting — based on real client work and iterative feedback.
 
